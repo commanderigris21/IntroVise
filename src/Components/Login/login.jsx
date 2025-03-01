@@ -3,6 +3,20 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./login.css";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const settings = {
+  dots: false,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,          
+  autoplaySpeed: 2500,     
+  pauseOnHover: false,  // scrolls even when you hover
+};
 
 const clientId = "315124824926-eojplkm74o08v3qrsqjuudqbkfctmnhl.apps.googleusercontent.com";
 
@@ -96,13 +110,19 @@ function Login() {
         </nav>
 
         <div className="half">
-          <div className="ad">
-            <h1>AI-Powered Question Generation</h1> <br />
-            <p>
-              🧠 Uses AI & NLP to generate <br /> customized questions across
-              <br /> various categories.
-            </p>
-          </div>
+            <div className="slider">
+              <Slider {...settings}>
+            <div>
+              <img className="slider-img" src="/cards1.png" alt="Abstract 1" />
+            </div>
+            <div>
+              <img className="slider-img" src="/cards2.png" alt="Abstract 2" />
+            </div>
+            <div>
+              <img className="slider-img" src="/cards3.png" alt="Abstract 3" />
+            </div>
+            </Slider>
+        </div>
         </div>
 
         <p className="head">
@@ -111,7 +131,7 @@ function Login() {
         <p className="sec">Sign in with </p>
 
         {/* Google Login Button */}
-        <div className="google-login">
+        <div className="google-login1">
           <GoogleLogin
             onSuccess={handleLoginSuccess}
             onError={() => alert("Google Login Failed")}

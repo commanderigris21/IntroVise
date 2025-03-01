@@ -12,7 +12,7 @@ function Dashboard() {
     const fetchProgressData = async () => {
       try {
         const response = await axios.get('http://localhost:8080/api/progress');
-        setProgressData(response.data); // Assuming the response contains 'progress1', 'progress2', and 'progress3' fields
+        setProgressData(response.data);
       } catch (error) {
         console.error('Error fetching progress data:', error);
       }
@@ -59,33 +59,44 @@ function Dashboard() {
       <div className="progress-bars">
         <div className="progress-bar">
           <p className='progress-text1'>Beheviour</p>
-          <CircularProgressbar value={progressData.progress1} maxValue={100} text={`${progressData.progress1}%`} />
+          <CircularProgressbar 
+            value={progressData.progress1} 
+            maxValue={100} 
+            text={`${progressData.progress1}%`}
+            styles={{
+              text: {
+                fill: '#573280'
+              }
+            }}
+          />
         </div>
         <div className="progress-bar">
           <p className='progress-text2'>Communication</p>
-          <CircularProgressbar value={progressData.progress2} maxValue={100} text={`${progressData.progress2}%`} />
+          <CircularProgressbar 
+            value={progressData.progress2} 
+            maxValue={100} 
+            text={`${progressData.progress2}%`}
+            styles={{
+              text: {
+                fill: '#573280'
+              }
+            }}
+          />
         </div>
         <div className="progress-bar">
           <p className='progress-text3'>Problem Solving</p>
-          <CircularProgressbar value={progressData.progress3} maxValue={100} text={`${progressData.progress3}%`} />
+          <CircularProgressbar 
+            value={progressData.progress3} 
+            maxValue={100} 
+            text={`${progressData.progress3}%`}
+            styles={{
+              text: {
+                fill: '#573280'
+              }
+            }}
+          />
         </div>
       </div>
-      <table className="progress-table">
-        <thead>
-          <tr>
-            <th>Beheviour</th>
-            <th>Communication</th>
-            <th>Problem Solving</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{progressData.progress1}%</td>
-            <td>{progressData.progress2}%</td>
-            <td>{progressData.progress3}%</td>
-          </tr>
-        </tbody>
-      </table>
       <div className="buttons-container">
         <button className="download-button" onClick={handleDownloadCertificate}>Download Certificate</button>
         <button className="download-button" onClick={handleDownloadReport}>Download Report</button>
@@ -95,3 +106,5 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
+

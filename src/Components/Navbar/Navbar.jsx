@@ -129,12 +129,25 @@ function ResponsiveAppBar() {
             >
               LOGO
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
+            <Box sx={{ 
+              flexGrow: 1, 
+              display: { xs: 'none', md: 'flex' }, 
+              justifyContent: 'flex-end',
+              gap: 3,
+              marginRight: 4
+            }}>
               {pages.map((page) => (
                 <Button
                   key={page}
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: darkMode ? 'white' : 'black', display: 'block' }}
+                  sx={{ 
+                    my: 2, 
+                    color: darkMode ? 'white' : 'black', 
+                    display: 'block',
+                    mx: 1,
+                    fontSize: '1rem',
+                    textTransform: 'none'
+                  }}
                 >
                   {page}
                 </Button>

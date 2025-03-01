@@ -1,147 +1,177 @@
-\/* Facecam Container */
+/* facecam.css */
+/* Page-specific styles */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.facecam-page {
+  background-color: #faf3dd;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.facecam-page * {
+  box-sizing: border-box;
+}
+
+/* Navbar Fix */
+.facecam-page .MuiAppBar-root {
+  width: 100vw !important;
+  background-color: #faf3dd !important;
+  box-shadow: none !important;
+  padding: 0 10px !important;
+  flex-shrink: 0;
+}
+
+/* Main content container */
 .facecam-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.p1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #333;
-}
-
-/* Controls */
-.facecam-controls {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.facecam-button {
-    padding: 10px 15px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-
-.facecam-button:hover {
-    background-color: #0056b3;
-}
-
-/* Video Container */
+/* Video Container - Modified */
 .facecam-video-container {
-    position: relative;
-    width: 100%;
-    max-width: 600px;
-    height: 350px;
-    background: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 2px solid #ccc;
+  position: relative;
+  width: 100%;
+  max-width: 600px; /* Increased from 600px */
+  height: 339px;
+  background: black !important;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid #ccc;
+  margin: 20px auto;
+  flex-shrink: 0;
 }
 
 .facecam-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Changed from 'cover' to 'contain' */
 }
 
-.facecam-placeholder {
-    color: white;
-    font-size: 18px;
-}
-
-/* Interview Questions */
+/* Interview Section */
 .interview {
-    margin-top: 20px;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    position: fixed;
-    right: 40px;
-    bottom: 30%;
-    width: 50%;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto 30px;
+  padding: 5px;
+  border-radius: 10px;
+  border: 2px solid #573280;
+  width: 700px;
+  height: 150px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* Rest of your original styles remain unchanged below */
+/* Controls */
+.facecam-controls {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  max-width: 60px;
+  flex-direction: column;
+  position: absolute;
+  bottom: 280px;
+  left: 1120px;
+}
+
+/* Buttons */
+.facecam-page button {
+  background-color: #573280 !important;
+  color: white !important;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s !important;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.facecam-page button:hover {
+  background-color: #432060 !important;
+}
+
+.facecam-page button:disabled {
+  background-color: #9277a7 !important;
+  cursor: not-allowed;
+}
+
+.p1 {
+  font-size: 28px;
+  color: #573280;
+  text-align: center;
+  margin: 0px 0;
 }
 
 .p3 {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 15px;
+  font-size: 20px;
+  color: #573280;
+  margin: 5px 0px;
 }
 
-.interview div {
-    display: flex;
+.question-container {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.current-question {
+  font-size: 15px;
+  font-weight: bold;
+  padding: 5px;
+  background-color: #f0e5f8;
+  border-radius: 8px;
+  max-width: 700px;
+}
+
+.skip-button {
+  max-width: 200px;
+  margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .facecam-video-container {
+    width: 95%;
+    height: 300px;
+    max-width: 600px; /* Adjusted for mobile */
+  }
+
+  .interview {
+    width: 95%;
+    margin: 20px auto;
+  }
+
+  .p1 {
+    font-size: 24px;
+  }
+
+  .facecam-controls {
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+  }
 }
 
-.interview div:last-child {
-    border-bottom: none;
+.btn2 {
+  max-width: 500px;
+  margin-top: 8px;
+  margin-left: 950px;
 }
 
-.btn-p1, .btn-p2, .btn-p3, .btn-p4, .btn-p5, .btn-p6 {
-    width: 30px;
-    height: 30px;
-    background: red;
-    border-radius: 50%;
-    cursor: pointer;
-    border: none;
-    transition: 0.3s;
+.facecam-page button.btn3 {
+  background-color: #cb0303 !important;
+  color: #ffffff !important;
 }
 
-.btn-p1:hover, .btn-p2:hover, .btn-p3:hover, .btn-p4:hover, .btn-p5:hover, .btn-p6:hover {
-    background: darkred;
-}
-
-.btnx {
-    display: block;
-    width: 40%;
-    padding: 10px;
-    background: #dc3545;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-    margin-left: 20px;
-    transition: 0.3s;
-}
-
-.btnx:hover {
-    background: #a71d2a;
-}
-
-.btnN {
-    display: block;
-    width: 20%;
-    padding: 10px;
-    background: skyblue;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    position: fixed;
-    top: 449px;
-    right: 50px;
-    transition: 0.3s;
+.facecam-page button.btn3:hover {
+  background-color: #ec1818 !important;
 }

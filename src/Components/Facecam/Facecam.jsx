@@ -1,150 +1,152 @@
-import React, { useState, useRef } from 'react';
-import axios from 'axios';
-import './Facecam.css';
+
+
+// Facecam.jsx
+import React, { useState, useRef, useEffect } from 'react';
+import './facecam.css';
 
 const Facecam = () => {
-    const [stream, setStream] = useState(null);
-    const [isMuted, setIsMuted] = useState(false);
-    const [isRecording, setIsRecording] = useState(false);
-    const [recordedVideos, setRecordedVideos] = useState({});
-    const videoRef = useRef(null);
-    const mediaRecorderRef = useRef(null);
-    const recordedChunks = useRef([]);
-    const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [cameraOn, setCameraOn] = useState(false);
+  const [recording, setRecording] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [questions, setQuestions] = useState([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const videoRef = useRef(null);
+  const mediaStreamRef = useRef(null);
 
-    const startCamera = async () => {
-        try {
-            const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-            setStream(mediaStream);
-            if (videoRef.current) {
-                videoRef.current.srcObject = mediaStream;
-            }
-        } catch (err) {
-            console.error('Error accessing media devices:', err);
-        }
+  // Simulate fetching questions from backend
+  useEffect(() => {
+    // Replace this with actual API call
+    const mockFetchQuestions = async () => {
+      const sampleQuestions = [
+        "Tell me about yourself",
+        "What are your greatest strengths?",
+        "Describe a challenging situation you faced and how you handled it",
+        "Where do you see yourself in 5 years?",
+        "Why do you want to work for our company?",
+        "What is your greatest professional achievement?"
+      ];
+      setQuestions(sampleQuestions);
     };
 
-    const stopCamera = () => {
-        if (stream) {
-            stream.getTracks().forEach(track => track.stop());
-            setStream(null);
-            if (videoRef.current) {
-                videoRef.current.srcObject = null;
-            }
-        }
+    mockFetchQuestions();
+  }, []);
+
+  // Camera control
+  const toggleCamera = async () => {
+    try {
+      if (!cameraOn) {
+        const stream = await navigator.mediaDevices.getUserMedia({ 
+          video: { width: 1280, height: 720 },
+          audio: true
+        });
+        mediaStreamRef.current = stream;
+        videoRef.current.srcObject = stream;
+        setCameraOn(true);
+      } else {
+        mediaStreamRef.current.getTracks().forEach(track => track.stop());
+        videoRef.current.srcObject = null;
+        setCameraOn(false);
+      }
+    } catch (error) {
+      console.error('Error accessing camera:', error);
+      alert('Failed to access camera. Please check permissions.');
+    }
+  };
+
+  // Mute control
+  const toggleMute = () => {
+    if (mediaStreamRef.current) {
+      mediaStreamRef.current.getAudioTracks().forEach(track => {
+        track.enabled = !track.enabled;
+      });
+      setIsMuted(!isMuted);
+    }
+  };
+
+  // Question navigation
+  const handleSkipQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(prev => prev + 1);
+    }
+  };
+
+  // Cleanup
+  useEffect(() => {
+    return () => {
+      if (mediaStreamRef.current) {
+        mediaStreamRef.current.getTracks().forEach(track => track.stop());
+      }
     };
+  }, []);
 
-    const toggleMute = () => {
-        if (stream) {
-            stream.getAudioTracks().forEach(track => {
-                track.enabled = !track.enabled;
-            });
-            setIsMuted(!isMuted);
-        }
-    };
-
-    const startRecording = (question) => {
-        if (!stream) {
-            alert("Please start the camera first.");
-            return;
-        }
-
-        if (isRecording) {
-            alert("A recording is already in progress.");
-            return;
-        }
-
-        setCurrentQuestion(question);
-        recordedChunks.current = [];
-        const options = { mimeType: 'video/webm' };
-        const mediaRecorder = new MediaRecorder(stream, options);
-        mediaRecorderRef.current = mediaRecorder;
-
-        mediaRecorder.ondataavailable = (event) => {
-            if (event.data.size > 0) {
-                recordedChunks.current.push(event.data);
-            }
-        };
-
-        mediaRecorder.onstop = () => {
-            const blob = new Blob(recordedChunks.current, { type: 'video/webm' });
-            setRecordedVideos(prev => ({ ...prev, [question]: blob }));
-        };
-
-        mediaRecorder.start();
-        setIsRecording(true);
-    };
-
-    const stopRecording = () => {
-        if (mediaRecorderRef.current) {
-            mediaRecorderRef.current.stop();
-            setIsRecording(false);
-        }
-    };
-
-    const handleSubmit = async (question) => {
-        if (!recordedVideos[question]) {
-            alert(`No video recorded for "${question}". Please record an answer first.`);
-            return;
-        }
-
-        // Convert Blob to File
-        const videoBlob = recordedVideos[question];
-        const videoFile = new File([videoBlob], "recording.webm", { type: "video/webm" });
-
-        const formData = new FormData();
-        formData.append("question", question);
-        formData.append("video", videoFile); // Correctly append as a file
-
-        try {
-            const response = await axios.post("http://localhost:8080/api/videos/upload", formData, {
-                headers: { "Content-Type": "multipart/form-data" }
-            });
-            alert(`Video uploaded successfully! ID: ${response.data}`);
-        } catch (error) {
-            console.error(`Error uploading video for "${question}":`, error);
-        }
-    };
-
-    return (
-        <div>
-            <div className="facecam-container">
-                <p className='p1'>Developer Interview</p>
-                <div className="facecam-controls">
-                    <button className="facecam-button" onClick={startCamera}>Start Camera</button>
-                    {stream && (
-                        <>
-                            <button className="facecam-button" onClick={stopCamera}>Stop Camera</button>
-                            <button className="facecam-button" onClick={toggleMute}>{isMuted ? 'Unmute' : 'Mute'}</button>
-                        </>
-                    )}
-                </div>
-                <div className="facecam-video-container">
-                    <video className="facecam-video" ref={videoRef} autoPlay playsInline style={{ display: stream ? 'block' : 'none' }} />
-                    {!stream && <div className="facecam-placeholder">Camera is off</div>}
-                </div>
-            </div>
-
-            <div className='interview'>
-                <p className='p3'>Interview Questions</p>
-                {[
-                    "Can you tell about yourself?",
-                ].map((question, index) => (
-                    <div key={index} className={`div${index}`}>
-                        <p>{index + 1}. {question}</p>
-                        {isRecording && currentQuestion === question ? (
-                            <button className='btn-p' onClick={stopRecording}>⏹ Stop Recording</button>
-                        ) : (
-                            <button className='btn-p' onClick={() => startRecording(question)}>🎤 Start Recording</button>
-                        )}
-                        <button className='btn-submit' onClick={() => handleSubmit(question)}>📤 Upload</button>
-                    </div>
-                ))}
-                <button className='btnx'>Leave Interview</button>
-                <button className='btnN'>Next</button>
-            </div>
+  return (
+    <div className="facecam-page">
+      <div className="facecam-container">
+        <h1 className="p1">AI Interview Session</h1>
+        
+        <div className="facecam-video-container">
+          <video 
+            ref={videoRef}
+            className="facecam-video" 
+            autoPlay 
+            playsInline 
+            muted={isMuted}
+          />
+          {!cameraOn && (
+            <div className="facecam-placeholder">Camera Preview</div>
+          )}
         </div>
-    );
+
+        <div className="facecam-controls">
+          <button className="facecam-button" onClick={toggleCamera}>
+            {cameraOn ? 'Stop Camera' : 'Start Camera'}
+          </button>
+          
+          <button 
+            className="facecam-button" 
+            onClick={toggleMute}
+            disabled={!cameraOn}
+          >
+            {isMuted ? 'Unmute' : 'Mute'}
+          </button>
+          
+          <button 
+            className="facecam-button"
+            onClick={() => setRecording(!recording)}
+            disabled={!cameraOn}
+          >
+            {recording ? 'Stop Recording' : 'Start Recording'}
+          </button>
+          <button className="facecam-button btn3">
+            Leave Interview
+           </button>
+        </div>
+
+        <div className="interview">
+          <h3 className="p3">Interview Questions</h3>
+          <div className="question-container">
+            {questions.length > 0 ? (
+              <>
+                <div className="current-question">
+                  Q{currentQuestionIndex + 1}: {questions[currentQuestionIndex]}
+                </div>
+                <button 
+                  className="facecam-button skip-button"
+                  onClick={handleSkipQuestion}
+                  disabled={currentQuestionIndex >= questions.length - 1}
+                >
+                  Skip Question
+                </button>
+              </>
+            ) : (
+              <div>Loading questions...</div>
+            )}
+          </div>
+          <button className='btn2'>Submit</button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Facecam;
