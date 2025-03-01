@@ -7,6 +7,7 @@ import Resume from './Components/Resume/Resume';
 import Facecam from './Components/Facecam/Facecam';
 import Dashboard from './Components/Dashboard/Dashboard';
 import SignUp from './Components/SignUp/SignUp';
+import Landing from './Components/Landing/Landing';
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/facecam" element={<Facecam />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/landing" element={<Landing/>} />
       </Routes>
     </div>
   );
