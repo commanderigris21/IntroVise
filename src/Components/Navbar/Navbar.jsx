@@ -54,7 +54,7 @@ function ResponsiveAppBar() {
       <CssBaseline />
       <AppBar position="static" sx={{ backgroundColor: darkMode ? 'black' : 'white', boxShadow: 'none' }}>
         <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
+          <Toolbar disableGutters sx={{ justifyContent: 'space-between'}}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Typography
                 variant="h6"

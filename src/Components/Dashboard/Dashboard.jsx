@@ -54,54 +54,16 @@ function Dashboard() {
   };
 
   return (
-    <div className="dashboard-container">
-      <h1 className="dashboard-header">Dashboard</h1>
-      <div className="progress-bars">
-        <div className="progress-bar">
-          <p className='progress-text1'>Beheviour</p>
-          <CircularProgressbar 
-            value={progressData.progress1} 
-            maxValue={100} 
-            text={`${progressData.progress1}%`}
-            styles={{
-              text: {
-                fill: '#573280'
-              }
-            }}
-          />
-        </div>
-        <div className="progress-bar">
-          <p className='progress-text2'>Communication</p>
-          <CircularProgressbar 
-            value={progressData.progress2} 
-            maxValue={100} 
-            text={`${progressData.progress2}%`}
-            styles={{
-              text: {
-                fill: '#573280'
-              }
-            }}
-          />
-        </div>
-        <div className="progress-bar">
-          <p className='progress-text3'>Problem Solving</p>
-          <CircularProgressbar 
-            value={progressData.progress3} 
-            maxValue={100} 
-            text={`${progressData.progress3}%`}
-            styles={{
-              text: {
-                fill: '#573280'
-              }
-            }}
-          />
-        </div>
-      </div>
+    <div className="img-dash-container">
+      <div className="dashboard-container">
+      <h1 className="dashboard-header">Great Job! <br />Interview Done.</h1>
+      <h3 className="dashboard-download">Download your analysis report from below.</h3>
       <div className="buttons-container">
-        <button className="download-button" onClick={handleDownloadCertificate}>Download Certificate</button>
         <button className="download-button" onClick={handleDownloadReport}>Download Report</button>
       </div>
     </div>
+    </div>
+    
   );
 }
 

@@ -1,65 +1,62 @@
 :root {
   --purple: #573280;
   --cream: #faf3dd;
-  --base-font: 16px; /* Base font size for rem calculations */
+  --base-font: 16px;
 }
 
 .dashboard-header {
+  color: white;
+  font-size: 3.8rem;
+  position: relative;
+  top: 40px;
+  left: 0%;
   text-align: center;
-  color: var(--purple);
-  margin-bottom: 2rem;
-  position: relative;
   z-index: 1;
 }
 
-.progress-text1,
-.progress-text2,
-.progress-text3 {
-  font-size: 1.5rem; /* 24px */
-  font-weight: bold;
-  color: var(--purple);
-  margin-bottom: 1rem;
+.dashboard-download {
+  color: white;
   position: relative;
-  z-index: 1;
-}
-
-.progress-bars {
-  display: flex;
-  justify-content: center;
-  gap: 4rem;
-  margin: 2rem 0;
-  position: relative;
-  z-index: 1;
-}
-
-.progress-bar {
-  width: 12.5rem; /* 200px */
-  height: 12.5rem; /* 200px */
+  bottom: 1rem;
+  left: 0%;
+  font-size: 1.4rem;
   text-align: center;
-  position: relative;
+  top: 0rem;
   z-index: 1;
 }
 
 .buttons-container {
   display: flex;
   justify-content: center;
-  gap: 1.25rem; /* 20px */
-  margin-top: 10.625rem; /* 170px */
+  gap: 1.25rem;
   position: relative;
   z-index: 1;
 }
 
 .download-button {
-  padding: 0.9375rem 1.25rem; /* 15px 20px */
+  padding: 0.9375rem 1.25rem;
   background-color: var(--purple);
   color: #fff;
   border: none;
-  border-radius: 0.3125rem; /* 5px */
+  border-radius: 0.3125rem;
   cursor: pointer;
-  font-size: 1rem; /* 16px */
+  font-size: 1rem;
   transition: transform 0.3s ease;
 }
 
 .download-button:hover {
   transform: scale(1.05);
+}
+
+.dashboard-container {
+  width: 50%;
+  margin: 6.5rem auto;
+  padding-top: 6rem;
+}
+
+.img-dash-container {
+  width: 100%;
+  height: 90.9%;
+  background-image: url("./dashboard_img.jpg");
+  margin-top: -6.875rem;
 }
