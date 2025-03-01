@@ -11,7 +11,7 @@ root {
 .Inrovise {
   font-size: 24px;
   font-weight: bold;
-  color: #333;
+  color: #faf3dd;
   z-index: +5;
   position: fixed;
   left: 90px;
@@ -31,12 +31,27 @@ root {
 }
 
 .half {
-  background-color: #faf3dd;
   width: 48%;
   height: 100vh;
   display: flex;
   padding-top: 200px;
   align-items: center;
+  z-index: -1;
+  position: relative;
+}
+
+.half::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/wavy_login.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(1.5px);
   z-index: -1;
 }
 
@@ -172,23 +187,23 @@ root {
 }
 
 .google-btn img {
-  width: 50px; /* Adjust size */
+  width: 50px;
   height: auto;
 }
 
 .slider-img {
-  width: 100%; /* Makes images fully fit their container */
-  height: auto; /* Maintains aspect ratio */
-  max-height: 400px; /* Adjust based on your preference */
-  object-fit: contain; /* Ensures images aren't stretched */
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
   border-radius: 20px;
 }
 
 .slider {
-  max-width: 900px; /* Ensures it doesn't exceed this width */
-  width: 100%; /* Adapts to container */
+  max-width: 900px;
+  width: 100%;
   margin: auto;
-  overflow: hidden; /* Prevents extra spacing */
+  overflow: hidden;
 }
 
 .slider-container {
@@ -203,5 +218,17 @@ root {
   justify-content: center;
 }
 .slick-list {
-  padding: 0 !important; /* Removes extra space */
+  padding: 0 !important;
+}
+
+.Nav img {
+  height: 50px;
+  width: auto;
+  margin-right: 10px;
+  z-index: +100;
+  position: fixed;
+  left: 40px;
+  top: 28px;
+  filter: invert(94%) sepia(8%) saturate(556%) hue-rotate(358deg)
+    brightness(102%) contrast(95%); /* New color filter for #faf3dd */
 }

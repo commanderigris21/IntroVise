@@ -9,7 +9,6 @@ body {
 }
 
 .facecam-page {
-  background-color: #faf3dd;
   height: 100vh;
   padding: 20px;
   display: flex;
@@ -24,7 +23,6 @@ body {
 /* Navbar Fix */
 .facecam-page .MuiAppBar-root {
   width: 100vw !important;
-  background-color: #faf3dd !important;
   box-shadow: none !important;
   padding: 0 10px !important;
   flex-shrink: 0;
@@ -42,7 +40,7 @@ body {
 .facecam-video-container {
   position: relative;
   width: 100%;
-  max-width: 600px; /* Increased from 600px */
+  max-width: 600px;
   height: 339px;
   background: black !important;
   border-radius: 10px;
@@ -55,7 +53,7 @@ body {
 .facecam-video {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Changed from 'cover' to 'contain' */
+  object-fit: contain;
 }
 
 /* Interview Section */
@@ -70,7 +68,6 @@ body {
   overflow: hidden;
 }
 
-/* Rest of your original styles remain unchanged below */
 /* Controls */
 .facecam-controls {
   display: flex;
@@ -128,7 +125,6 @@ body {
   font-size: 15px;
   font-weight: bold;
   padding: 5px;
-  background-color: #f0e5f8;
   border-radius: 8px;
   max-width: 700px;
 }
@@ -143,7 +139,7 @@ body {
   .facecam-video-container {
     width: 95%;
     height: 300px;
-    max-width: 600px; /* Adjusted for mobile */
+    max-width: 600px;
   }
 
   .interview {

@@ -3,17 +3,12 @@
   --cream: #faf3dd;
 }
 
-.dashboard-container {
-  padding: 20px;
-  min-height: 100vh;
-  background-color: var(--cream);
-  font-family: Arial, sans-serif;
-}
-
 .dashboard-header {
   text-align: center;
   color: var(--purple);
   margin-bottom: 2rem;
+  position: relative; /* Ensure it stays above the blur */
+  z-index: 1; /* Ensure it stays above the blur */
 }
 
 .progress-text1,
@@ -23,6 +18,8 @@
   font-weight: bold;
   color: var(--purple);
   margin-bottom: 1rem;
+  position: relative; /* Ensure it stays above the blur */
+  z-index: 1; /* Ensure it stays above the blur */
 }
 
 .progress-bars {
@@ -30,12 +27,16 @@
   justify-content: center;
   gap: 4rem;
   margin: 2rem 0;
+  position: relative; /* Ensure it stays above the blur */
+  z-index: 1; /* Ensure it stays above the blur */
 }
 
 .progress-bar {
   width: 200px;
   height: 200px;
   text-align: center;
+  position: relative; /* Ensure it stays above the blur */
+  z-index: 1; /* Ensure it stays above the blur */
 }
 
 .buttons-container {
@@ -43,12 +44,14 @@
   justify-content: center;
   gap: 20px;
   margin-top: 170px;
+  position: relative; /* Ensure it stays above the blur */
+  z-index: 1; /* Ensure it stays above the blur */
 }
 
 .download-button {
   padding: 15px 20px;
   background-color: var(--purple);
-  color: var(--cream);
+  color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;

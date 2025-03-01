@@ -5,7 +5,7 @@
 
 .box {
   border: 5px solid whitesmoke;
-  background-color: var(--cream);
+  background-color: white;
   width: 900px;
   height: 80vh;
   border-radius: 20px 20px 20px 80px;
@@ -63,7 +63,7 @@
 .btn-r {
   background-color: var(--purple);
   border: none;
-  color: var(--cream);
+  color: white;
   border-radius: 10px;
   height: 40px;
   width: 100px;
