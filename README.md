@@ -28,7 +28,7 @@
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/yourusername/introvise.git
+git clone https://github.com/commanderigris21/introvise.git
 cd introvise
 npm install
 npm run dev
