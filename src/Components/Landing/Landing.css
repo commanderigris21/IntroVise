@@ -63,6 +63,8 @@
   transition: all 0.3s ease;
 }
 
+
+
 .nav-right a:first-child {
   color: #4a5568;
 }
@@ -84,10 +86,11 @@
   padding: 0.6rem 1.5rem;
   border-radius: 6px;
   transition: background-color 0.3s ease;
+  z-index: 100;
 }
 
 .signup-button:hover {
-  background-color: #FFBC3A; 
+  cursor: pointer;
 }
 
 #login-l {
@@ -101,7 +104,9 @@
 width: 200px;
 height: 50px; 
 background-color: #573280;
+color: white;
 border: 0px;
+font-size: large;
 border-radius: 5px;
 cursor: pointer;
 transition: transform 0.3s ease;
@@ -125,7 +130,7 @@ cursor: pointer;
 transition: transform 0.3s ease;
 position: absolute;
 bottom: 153px;
-left: 17%;
+left: 20%;
 display: flex;
 align-items: center;
 gap: 8px;
@@ -155,7 +160,7 @@ border: none;
   font-size: 1.5rem;
   font-weight: 500;
   color: black;
-  margin-top: -50px;
+  margin-top: -40px;
   margin-left: 40px;
 }
 
@@ -163,7 +168,7 @@ border: none;
   width: 485px;
   height: 500px;
   left: 40px;
-  top: 940px;
+  top: 2000px;
   display: flex;
   flex-direction: row;
   transition: transform 0.3s ease;
@@ -257,6 +262,10 @@ border: none;
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
+.pg2 {
+  margin-top: -20px;
+}
+
 .show {
   opacity: 1;
   transform: translateY(0);
@@ -267,7 +276,7 @@ border: none;
   font-size: 4rem;
   font-weight: 700;
   color: black;
-  margin-top: -20px;
+  margin-top: -30px;
   margin-left: 40px;
 }
 
@@ -275,7 +284,7 @@ border: none;
   font-size: 1.5rem;
   font-weight: 500;
   color: black;
-  margin-top: -50px;
+  margin-top: -40px;
   margin-left: 40px;
 }
 
@@ -287,7 +296,7 @@ border: none;
 
 .pg3 {
   width: 100%;
-  margin-top: -50px;
+  margin-top: -30px;
 }
 
 .testimonial-section {
@@ -397,6 +406,7 @@ border: none;
 }
 
 .footer img {
-  width: 95%;
+  width: 100%;
+  border-radius: 10px;
   padding-top: 20px;
 }

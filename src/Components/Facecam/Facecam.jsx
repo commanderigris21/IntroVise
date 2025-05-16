@@ -1,10 +1,9 @@
-
-
-// Facecam.jsx
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import './facecam.css';
 
 const Facecam = () => {
+  const [showingAllQuestions, setShowingAllQuestions] = useState(false);
   const [cameraOn, setCameraOn] = useState(false);
   const [recording, setRecording] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -12,10 +11,10 @@ const Facecam = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const videoRef = useRef(null);
   const mediaStreamRef = useRef(null);
+  const navigate = useNavigate();
 
   // Simulate fetching questions from backend
   useEffect(() => {
-    // Replace this with actual API call
     const mockFetchQuestions = async () => {
       const sampleQuestions = [
         "Tell me about yourself",
@@ -79,6 +78,17 @@ const Facecam = () => {
     };
   }, []);
 
+  const handleSubmit = async () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      // Move to next question
+      setCurrentQuestionIndex(prev => prev + 1);
+    } else {
+      // On last question, finish interview
+      setShowingAllQuestions(true);
+      navigate('/dashboard');
+    }
+  };
+
   return (
     <div className="facecam-page">
       <div className="facecam-container">
@@ -117,9 +127,13 @@ const Facecam = () => {
           >
             {recording ? 'Stop Recording' : 'Start Recording'}
           </button>
-          <button className="facecam-button btn3">
+          
+          <button 
+            className="facecam-button btn3" 
+            onClick={() => navigate('/dashboard')}
+          >
             Leave Interview
-           </button>
+          </button>
         </div>
 
         <div className="interview">
@@ -131,18 +145,16 @@ const Facecam = () => {
                   Q{currentQuestionIndex + 1}: {questions[currentQuestionIndex]}
                 </div>
                 <button 
-                  className="facecam-button skip-button"
-                  onClick={handleSkipQuestion}
-                  disabled={currentQuestionIndex >= questions.length - 1}
+                  className='btn2' 
+                  onClick={handleSubmit}
                 >
-                  Skip Question
+                  {currentQuestionIndex === questions.length - 1 ? 'Finish Interview' : 'Submit & Next Question'}
                 </button>
               </>
             ) : (
               <div>Loading questions...</div>
             )}
           </div>
-          <button className='btn2'>Submit</button>
         </div>
       </div>
     </div>
